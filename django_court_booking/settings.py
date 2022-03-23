@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     #own apps
     'court_booking'
 ]
@@ -84,6 +90,15 @@ DATABASES = {
 }
 
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -102,6 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+SITE_ID = 1
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'court_booking.forms.SignupForm'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
