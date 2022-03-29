@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
@@ -33,6 +33,3 @@ class Reservation(models.Model):
     booking_date = models.DateField(auto_now=False, auto_now_add=False)
     court = models.ForeignKey(Court, on_delete=models.CASCADE, related_name='court_reservation')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_reservation')
-
-    def __str__(self):
-        return self.user
