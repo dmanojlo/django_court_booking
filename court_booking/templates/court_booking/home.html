@@ -9,4 +9,27 @@
   <li>Location: {{ user.profile.location }}</li>
   <li>Birth Date: {{ user.profile.birth_date }}</li>
 </ul>
+
+<div class="mycal" style="width:100%;"></div>
+
+<!-- THE MODAL WE WILL BE USING -->
+      <div class="modal fade" id="modal-timeslot">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Potvrdi brisanje</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p class="lead">trrzr</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+  <button type="submit" class="btn btn-danger">Izbriši</button>
+</div>
+        </div>
+      </div>
+     </div>
 {% endblock %}
