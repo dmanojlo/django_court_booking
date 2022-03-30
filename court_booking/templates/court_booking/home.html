@@ -1,14 +1,6 @@
 {% extends 'court_booking/base.html' %}
 
 {% block content %}
-<h1>Testing test</h1>
-
-<h2>{{ user.get_full_name }}</h2>
-<ul>
-  <li>Username: {{ user.username }}</li>
-  <li>Location: {{ user.profile.location }}</li>
-  <li>Birth Date: {{ user.profile.birth_date }}</li>
-</ul>
 
 <div class="mycal" style="width:100%;"></div>
 
@@ -18,17 +10,17 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Potvrdi brisanje</h4>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <p class="lead">trrzr</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
-  <button type="submit" class="btn btn-danger">Izbriši</button>
-</div>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="lead">trrzr</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+              <button type="submit" class="btn btn-danger">Izbriši</button>
+            </div>
         </div>
       </div>
      </div>

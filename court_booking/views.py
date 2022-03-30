@@ -14,10 +14,20 @@ from django.core.cache import cache
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Reservation, Court
+from .forms import ReservationForm, SignupForm, CourtForm
 
 # Create your views here.
 
 import json
 
 def home(request):
-    return render(request, 'court_booking/home.html', {})
+    data = dict()
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+    else:
+        form = ReservationForm()
+
+    context = {'form':form}
+    #data['html_form'] = render_to_string('court_booking/home.html', context, request)
+    #return JsonResponse(data)
+    return render(request, 'court_booking/home.html', context)

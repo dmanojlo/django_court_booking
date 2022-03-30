@@ -34,6 +34,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
@@ -53,14 +54,26 @@
 
 			dayClick : function(el, startTime){
 
-				$("#modal-timeslot").modal('show');
+        $.ajax({
+          url: '/home/',
+          type: 'get',
+          dataType: 'json',
+          beforeSend: function () {
+            $("#modal-book .modal-content").html("");
+            $("#modal-book").modal("show");
+          },
+          success: function (data) {
+            $("#modal-book .modal-content").html(data.html_form);
+          }
+        });
+
+
+				// $("#modal-timeslot").modal('show');
 				console.log('Slot selected: ' + startTime);
 			},
 			eventClick : function(eventId){
 				console.log('Event was clicked with id: ' + eventId);
 			},
-
-			events : getEvents(),
 
 			overlapColor : '#FF0',
 			overlapTextColor : '#000',
@@ -69,6 +82,66 @@
 
 
 	</script>
+
+  <script type="text/javascript">
+  $(function () {
+
+  /* Functions */
+
+  var loadForm = function () {
+    var btn = $(this);
+    $.ajax({
+      url: btn.attr("data-url"),
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-book .modal-content").html("");
+        $("#modal-book").modal("show");
+      },
+      success: function (data) {
+        $("#modal-book .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  var saveForm = function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#izdano-table tbody").html(data.html_izdano_list);
+          $("#modal-book").modal("hide");
+          //console.log(data.html_izdano_list)
+        }
+        else {
+          $("#modal-book .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
+
+
+  /* Binding */
+
+  // Create book
+  $(".js-create-book").click(loadForm);
+  $("#modal-book").on("submit", ".js-izdano-create-form", saveForm);
+
+  // Update book
+  $("#izdano-table").on("click", ".js-update-izdano", loadForm);
+  $("#modal-book").on("submit", ".js-izdano-update-form", saveForm);
+
+  // Delete book
+  $("#izdano-table").on("click", ".js-delete-izdano", loadForm);
+  $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
+
+});
+</script>
 
     {% block javascript %}{% endblock %}
   </body>
