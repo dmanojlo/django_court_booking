@@ -31,3 +31,17 @@ def home(request):
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
     return render(request, 'court_booking/home.html', context)
+
+def partial_res(request):
+    data = dict()
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', {'form': form})
+
+    else:
+        form = ReservationForm()
+    context = {'form':form}
+    data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', context, request)
+    return JsonResponse(data)
