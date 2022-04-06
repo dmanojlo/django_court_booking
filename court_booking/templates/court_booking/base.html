@@ -47,8 +47,8 @@
 			startDate : '31-10-2014', // OR 31/10/2104
 			timeFormat : 'HH:mm',
 			columnDateFormat : 'dddd, DD MMM',
-			minTime : '09:00:00',
-			maxTime : '19:00:00',
+			minTime : '09:00',
+			maxTime : '19:00',
 			slotDuration : 30,
 			timeGranularity : 15,
 
@@ -64,6 +64,9 @@
           },
           success: function (data) {
             $("#modal-book .modal-content").html(data.html_form);
+            $("#id_start_time").val(startTime);
+            document.getElementById('id_start_time').disabled = true
+            $("#id_end_time").val(parseInt(startTime, 10) + 1 + ":"+startTime[3]+startTime[4]);
           }
         });
 

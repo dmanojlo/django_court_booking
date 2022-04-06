@@ -31,9 +31,9 @@
 		},
 
 		format : {
-			dateLong : 'DD-MM-YYYY HH:mm:ss',
+			dateLong : 'DD-MM-YYYY HH:mm',
 			dateShort : 'DD-MM-YYYY',
-			timeLong : 'HH:mm:ss',
+			timeLong : 'HH:mm',
 			timeShort : 'HH:mm'
 		}
 	};
@@ -57,13 +57,13 @@
 			self.momMaxTime = moment(this.options.maxTime, format.timeLong);
 
 			self._launch();
-			self._attachEventHandlers();			
+			self._attachEventHandlers();
 		},
 
 		_launch : function(){
 			this._display();
 			this._calculateDimensions();
-			this._inflateMinorSlots();	
+			this._inflateMinorSlots();
 			this._showEvents();
 		},
 
@@ -82,7 +82,7 @@
 					if(typeof self.options.eventClick === 'function'){
 						var $eventContainer = (($(ev.target).closest('.' + classes.eventContainer).length) ? $(ev.target).closest('.' + classes.eventContainer) : $(ev.target));
 						var eventId = $eventContainer.attr('data-event-id');
-						
+
 						self.options.eventClick.apply(self, [eventId]);
 					}
 				}else if(typeof self.options.dayClick === 'function'){
@@ -104,7 +104,7 @@
 		refresh : function(events){
 			this._detachEventHandlers();
 			this._clearEvents();
-			
+
 			if(events){
 				this.options.events = events;
 			}
@@ -125,7 +125,7 @@
 			var res = {};
 			var events = this.options.events;
 			var date = this.momStartDate.clone().isoWeekday(1);
-			
+
 			for(var i = 0 ; i < 7 ; i++){
 				var dateStr = date.format(format.dateShort);
 				var filteredEvents = _.filter(events, function(event){
@@ -149,10 +149,10 @@
 			var eventDateMap = this._mapEventsByDate(), $col = null, $slots = null, $slot = null, schedule = null, slotTime = null;
 
 			_.each($cols, function(col, i){
-				$col = $(col); 
+				$col = $(col);
 				var colDate = $col.attr('data-date');
 				var dayEvents = eventDateMap[colDate];
-				
+
 				if(dayEvents.length){
 					schedule = self.getDaySchedule(dayEvents);
 
@@ -161,7 +161,7 @@
 					}else{
 						$slots = $col.find('.' + classes.timeSlot + ' .' + classes.minorSlot);
 					}
-					
+
 					_.each($slots, function(slot, i){
 						$slot = $(slot);
 						slotTime = $slot.attr('data-time');
@@ -206,7 +206,7 @@
 								}
 							}
 						}
-						
+
 					});
 				}
 			});
@@ -244,7 +244,7 @@
 			}else if(scheduleList.length){
 				var schedule = scheduleList[0];
 				var startTime = moment(schedule.start, format.dateLong).format(format.timeShort);
-				var endTime = moment(schedule.end, format.dateLong).format(format.timeShort); 
+				var endTime = moment(schedule.end, format.dateLong).format(format.timeShort);
 				html += '' +
 					'<div style="padding-top: 4px;">' +
 						'<div class="' + classes.timeRange + '">' + startTime + ' - ' + endTime + '</div>' +
@@ -268,7 +268,7 @@
 				end = begining.clone().add(this.options.timeGranularity, 'm');
 
 				var slotEvents = _.filter(dayEvents, function(event){
-					
+
 					var eventStart = moment(event.start, format.dateLong);
 					var eventEnd = moment(event.end, format.dateLong);
 
@@ -327,7 +327,7 @@
 
 			var date = moment(this.options.startDate, format.dateShort);
 			date.isoWeekday(1);
-			
+
 			var html = '<table border="0" cellspacing="0" cellpadding="0" class="ec-time-grid-table"><tbody><tr>';
 
 			var cellContent = null, timeTag = null, colDate = null;
