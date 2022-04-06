@@ -7,7 +7,13 @@ from django.forms.widgets import TimeInput
 #         input_type = 'time'
 
 import datetime as dt
-HOUR_CHOICES = [(dt.time(hour=x,minute=30), '{:02d}:{:02d}'.format(x)) for x in range(9, 20)]
+import time
+
+HOUR_CHOICES = [(dt.time(hour=x, minute=m), '{:02d}:{:02d}'.format(x, m))
+                for x in range(9, 20) for m in (0, 30)]
+# HOUR_CHOICES = [time(h, m).strftime('%H:%M')
+#                 for h in range(9, 17) for m in (0, 30)]
+
 
 class SignupForm(forms.ModelForm):
     first_name = forms.CharField(max_length=100)
@@ -27,11 +33,13 @@ class SignupForm(forms.ModelForm):
         user.profile.birth_date = self.cleaned_data['birth_date']
         user.profile.save()
 
+
 class CourtForm(forms.ModelForm):
 
     class Meta:
         model = Court
         fields = ('court_name',)
+
 
 class ReservationForm(forms.ModelForm):
 
@@ -39,6 +47,6 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = ('start_time', 'end_time', 'booking_date', 'court', 'user')
         widgets = {
-            #'start_time': TimePickerInput(format='%H:%M'),
+            # 'start_time': TimePickerInput(format='%H:%M'),
             'end_time': forms.Select(choices=HOUR_CHOICES),
         }

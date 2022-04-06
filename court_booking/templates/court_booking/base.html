@@ -2,149 +2,169 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Court Booking</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta name="keywords" content="court, court booking, sports">
-        <meta name="description" content="Book sport court">
-        <meta name="author" content="Dragan Manojlovic">
+  <head>
+    <meta charset="utf-8" />
+    <title>Court Booking</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="keywords" content="court, court booking, sports" />
+    <meta name="description" content="Book sport court" />
+    <meta name="author" content="Dragan Manojlovic" />
 
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-        <!-- CSS Libraries -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet"  href="{% static 'css/easycal.css' %}">
+    <!-- CSS Libraries -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/easycal.css' %}" />
 
-        <!-- Template Stylesheet -->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <style>
-		body{ width: 960px; margin: 0 auto; font-size: 12px; font-family: Arial; box-sizing: border-box;}
-
-	</style>
-
-    </head>
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <style>
+      body {
+        width: 960px;
+        margin: 0 auto;
+        font-size: 12px;
+        font-family: Arial;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
   <body>
-
-    {% block content%}
-
-    {% endblock %}
+    {% block content%} {% endblock %}
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-  	<script src="{% static 'js/dataset.js' %}"></script>
-  	<script src="{% static 'js/easycal.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="{% static 'js/dataset.js' %}"></script>
+    <script src="{% static 'js/easycal.js' %}"></script>
 
+    <script>
+      $(".mycal").easycal({
+        startDate: "31-10-2014", // OR 31/10/2104
+        timeFormat: "HH:mm",
+        columnDateFormat: "dddd, DD MMM",
+        minTime: "09:00",
+        maxTime: "19:00",
+        slotDuration: 30,
+        timeGranularity: 15,
 
-	<script>
-		$('.mycal').easycal({
-			startDate : '31-10-2014', // OR 31/10/2104
-			timeFormat : 'HH:mm',
-			columnDateFormat : 'dddd, DD MMM',
-			minTime : '09:00',
-			maxTime : '19:00',
-			slotDuration : 30,
-			timeGranularity : 15,
+        dayClick: function (el, startTime) {
+          $.ajax({
+            url: "/book/partial_res/",
+            type: "get",
+            dataType: "json",
+            beforeSend: function () {
+              $("#modal-book .modal-content").html("");
+              $("#modal-book").modal("show");
+            },
+            success: function (data) {
+              $("#modal-book .modal-content").html(data.html_form);
+              $("#id_start_time").val(startTime);
+              document.getElementById("id_start_time").disabled = true;
+              $("#id_end_time")
+                .val(
+                  parseInt(startTime, 10) +
+                    1 +
+                    ":" +
+                    startTime[3] +
+                    startTime[4]
+                )
+                .change();
+            },
+          });
 
-			dayClick : function(el, startTime){
+          // $("#modal-timeslot").modal('show');
+          console.log("Slot selected: " + startTime);
+        },
+        eventClick: function (eventId) {
+          console.log("Event was clicked with id: " + eventId);
+        },
 
-        $.ajax({
-          url: '/book/partial_res/',
-          type: 'get',
-          dataType: 'json',
-          beforeSend: function () {
-            $("#modal-book .modal-content").html("");
-            $("#modal-book").modal("show");
-          },
-          success: function (data) {
-            $("#modal-book .modal-content").html(data.html_form);
-            $("#id_start_time").val(startTime);
-            document.getElementById('id_start_time').disabled = true
-            $("#id_end_time").val(parseInt(startTime, 10) + 1 + ":"+startTime[3]+startTime[4]);
-          }
-        });
+        overlapColor: "#FF0",
+        overlapTextColor: "#000",
+        overlapTitle: "Multiple",
+      });
+    </script>
 
+    <script type="text/javascript">
+      $(function () {
+        /* Functions */
 
-				// $("#modal-timeslot").modal('show');
-				console.log('Slot selected: ' + startTime);
-			},
-			eventClick : function(eventId){
-				console.log('Event was clicked with id: ' + eventId);
-			},
+        var loadForm = function () {
+          var btn = $(this);
+          $.ajax({
+            url: btn.attr("data-url"),
+            type: "get",
+            dataType: "json",
+            beforeSend: function () {
+              $("#modal-book .modal-content").html("");
+              $("#modal-book").modal("show");
+            },
+            success: function (data) {
+              $("#modal-book .modal-content").html(data.html_form);
+            },
+          });
+        };
 
-			overlapColor : '#FF0',
-			overlapTextColor : '#000',
-			overlapTitle : 'Multiple'
-		});
+        var saveForm = function () {
+          var form = $(this);
+          $.ajax({
+            url: form.attr("action"),
+            data: form.serialize(),
+            type: form.attr("method"),
+            dataType: "json",
+            success: function (data) {
+              if (data.form_is_valid) {
+                $("#izdano-table tbody").html(data.html_izdano_list);
+                $("#modal-book").modal("hide");
+                //console.log(data.html_izdano_list)
+              } else {
+                $("#modal-book .modal-content").html(data.html_form);
+              }
+            },
+          });
+          return false;
+        };
 
+        /* Binding */
 
-	</script>
+        // Create book
+        $(".js-create-book").click(loadForm);
+        $("#modal-book").on("submit", ".js-izdano-create-form", saveForm);
 
-  <script type="text/javascript">
-  $(function () {
+        // Update book
+        $("#izdano-table").on("click", ".js-update-izdano", loadForm);
+        $("#modal-book").on("submit", ".js-izdano-update-form", saveForm);
 
-  /* Functions */
-
-  var loadForm = function () {
-    var btn = $(this);
-    $.ajax({
-      url: btn.attr("data-url"),
-      type: 'get',
-      dataType: 'json',
-      beforeSend: function () {
-        $("#modal-book .modal-content").html("");
-        $("#modal-book").modal("show");
-      },
-      success: function (data) {
-        $("#modal-book .modal-content").html(data.html_form);
-      }
-    });
-  };
-
-  var saveForm = function () {
-    var form = $(this);
-    $.ajax({
-      url: form.attr("action"),
-      data: form.serialize(),
-      type: form.attr("method"),
-      dataType: 'json',
-      success: function (data) {
-        if (data.form_is_valid) {
-          $("#izdano-table tbody").html(data.html_izdano_list);
-          $("#modal-book").modal("hide");
-          //console.log(data.html_izdano_list)
-        }
-        else {
-          $("#modal-book .modal-content").html(data.html_form);
-        }
-      }
-    });
-    return false;
-  };
-
-
-  /* Binding */
-
-  // Create book
-  $(".js-create-book").click(loadForm);
-  $("#modal-book").on("submit", ".js-izdano-create-form", saveForm);
-
-  // Update book
-  $("#izdano-table").on("click", ".js-update-izdano", loadForm);
-  $("#modal-book").on("submit", ".js-izdano-update-form", saveForm);
-
-  // Delete book
-  $("#izdano-table").on("click", ".js-delete-izdano", loadForm);
-  $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
-
-});
-</script>
+        // Delete book
+        $("#izdano-table").on("click", ".js-delete-izdano", loadForm);
+        $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
+      });
+    </script>
 
     {% block javascript %}{% endblock %}
   </body>
