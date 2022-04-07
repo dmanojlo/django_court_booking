@@ -11,10 +11,7 @@
     <meta name="author" content="Dragan Manojlovic" />
 
     <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <!-- CSS Libraries -->
     <link
@@ -84,16 +81,12 @@
             success: function (data) {
               $("#modal-book .modal-content").html(data.html_form);
               $("#id_start_time").val(startTime);
-              document.getElementById("id_start_time").disabled = true;
-              $("#id_end_time")
-                .val(
-                  parseInt(startTime, 10) +
-                    1 +
-                    ":" +
-                    startTime[3] +
-                    startTime[4]
-                )
-                .change();
+              //document.getElementById('id_start_time').disabled = true
+              var fillEndTime = parseInt(startTime, 10) + 1 + ":" + startTime[3] + startTime[4] + ":00";
+              $("#id_end_time").val(fillEndTime);
+              var d = new Date();
+              var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+              $("#id_booking_date").val(datestring);
             },
           });
 
