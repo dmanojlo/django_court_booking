@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+#Profile is used to extend user attributes because with allauth we only have basic attributes like first, last name
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     location = models.CharField(max_length=30, blank=True)

@@ -57,17 +57,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
     <script src="{% static 'js/dataset.js' %}"></script>
+    {{ courts |json_script:"num_courts" }}
+    <!-- safe way to include django variables to javascript -->
+    <script type="text/javascript">var num_of_courts = JSON.parse(document.getElementById('num_courts').textContent);</script>
     <script src="{% static 'js/easycal.js' %}"></script>
 
     <script>
       $(".mycal").easycal({
-        startDate: "31-10-2014", // OR 31/10/2104
         timeFormat: "HH:mm",
         columnDateFormat: "dddd, DD MMM",
         minTime: "09:00",
         maxTime: "19:00",
         slotDuration: 30,
-        timeGranularity: 15,
 
         dayClick: function (el, startTime) {
           $.ajax({
@@ -81,7 +82,7 @@
             success: function (data) {
               $("#modal-book .modal-content").html(data.html_form);
               $("#id_start_time").val(startTime);
-              //document.getElementById('id_start_time').disabled = true
+              document.getElementById('id_start_time').readOnly = true
               var fillEndTime = parseInt(startTime, 10) + 1 + ":" + startTime[3] + startTime[4] + ":00";
               $("#id_end_time").val(fillEndTime);
               var d = new Date();

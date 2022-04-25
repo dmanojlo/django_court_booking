@@ -12,6 +12,8 @@
 		}
 	}
 
+  var num_courts = num_of_courts
+
 	var widgetProperties = {
 		dataKey : 'easycal',
 		classnames : {
@@ -307,12 +309,13 @@
 			date.isoWeekday(1);
 
 			var html = '<table border="0" cellspacing="0" cellpadding="0" class="ec-head-table"><tbody><tr>';
-			for(var i = 0 ; i < 8 ; i++){
-				var cellContent = '';
+			for(var i = 0 ; i < num_courts.length+1 ; i++){
+				var cellContent = num_courts;
 				if(i !== 0){
-					cellContent = date.format(this.options.columnDateFormat);
-					html += '<td class="ec-day-header">' + cellContent + '</td>';
-					date.add(1, 'd');
+					//cellContent = date.format(this.options.columnDateFormat);
+					//cellContent = 'Teren 1'
+					html += '<td class="ec-day-header">' + cellContent[i-1] + '</td>';
+					//date.add(1, 'd');
 				}else{
 					html += '<td></td>';
 				}
@@ -332,7 +335,7 @@
 
 			var cellContent = null, timeTag = null, colDate = null;
 
-			for(var i = 0 ; i < 8 ; i++){
+			for(var i = 0 ; i < num_courts.length + 1 ; i++){
 				if(i===0){
 					html += '<td>';
 				}else{
@@ -417,7 +420,7 @@
 		minTime : '08:00:00',
 		maxTime : '19:00:00',
 		slotDuration : 30, //in mins
-		timeGranularity : 15, // in mins
+		//timeGranularity : 15, // in mins
 		dayClick : null,
 		eventClick : null,
 		events : [],
