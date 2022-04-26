@@ -92,6 +92,20 @@
           });
 
           // $("#modal-timeslot").modal('show');
+
+          $('.ec-slot').click(function () {
+            var name = $(this).closest('td').attr("data-date");
+            console.log(name)
+              //console.log($(this).data('time'));
+              //Check to see if background color is set or if it's set to white.
+              if(this.style.background == "" || this.style.background =="white") {
+                  $(this).css('background', 'red');
+              }
+              else {
+                  $(this).css('background', 'white');
+              }
+          });
+
           console.log("Slot selected: " + startTime);
         },
         eventClick: function (eventId) {
