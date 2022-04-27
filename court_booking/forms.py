@@ -45,10 +45,11 @@ class ReservationForm(forms.ModelForm):
 
     class Meta:
         model = Reservation
-        fields = ('start_time', 'end_time', 'booking_date', 'court', 'user')
+        fields = ('start_time', 'end_time', 'booking_date', 'court')
         widgets = {
             'start_time': forms.TimeInput(format='%H:%M'),
             # 'start_time': TimePickerInput(format='%H:%M'),
             'end_time': forms.Select(choices=HOUR_CHOICES),
-            'booking_date': forms.DateInput(format='%d.%m.%Y')
+            'booking_date': forms.DateInput(format='%d.%m.%Y'),
+            #'court': forms.TextInput()
         }

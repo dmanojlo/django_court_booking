@@ -63,6 +63,8 @@
     <script src="{% static 'js/easycal.js' %}"></script>
 
     <script>
+
+    $(document).ready(function() {
       $(".mycal").easycal({
         timeFormat: "HH:mm",
         columnDateFormat: "dddd, DD MMM",
@@ -71,6 +73,9 @@
         slotDuration: 30,
 
         dayClick: function (el, startTime) {
+          //to get the closest td  of clicked element
+          var court_name = $(el).closest('td').attr("data-courts");
+          console.log(court_name)
           $.ajax({
             url: "/book/partial_res/",
             type: "get",
@@ -88,23 +93,25 @@
               var d = new Date();
               var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
               $("#id_booking_date").val(datestring);
+              $("#id_court").val(court_name);
+              document.getElementById('id_court').readOnly = true
             },
           });
 
           // $("#modal-timeslot").modal('show');
 
-          $('.ec-slot').click(function () {
-            var name = $(this).closest('td').attr("data-date");
-            console.log(name)
-              //console.log($(this).data('time'));
-              //Check to see if background color is set or if it's set to white.
-              if(this.style.background == "" || this.style.background =="white") {
-                  $(this).css('background', 'red');
-              }
-              else {
-                  $(this).css('background', 'white');
-              }
-          });
+          // $('.ec-slot').click(function () {
+          //   var name = $(this).closest('td').attr("data-date");
+          //   console.log(name)
+          //     //console.log($(this).data('time'));
+          //     //Check to see if background color is set or if it's set to white.
+          //     if(this.style.background == "" || this.style.background =="white") {
+          //         $(this).css('background', 'red');
+          //     }
+          //     else {
+          //         $(this).css('background', 'white');
+          //     }
+          // });
 
           console.log("Slot selected: " + startTime);
         },
@@ -115,6 +122,7 @@
         overlapColor: "#FF0",
         overlapTextColor: "#000",
         overlapTitle: "Multiple",
+      });
       });
     </script>
 

@@ -340,7 +340,8 @@
 					html += '<td>';
 				}else{
 					colDate = date.format(format.dateShort);
-					html += '<td class="ec-slot-col" data-date="' + colDate + '">';
+					var colCourts = num_courts
+					html += '<td class="ec-slot-col" data-courts="' + colCourts[i-1] + '"  data-date="' + colDate + '">';
 					date.add(1, 'd');
 				}
 
