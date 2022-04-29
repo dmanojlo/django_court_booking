@@ -37,10 +37,18 @@ def home(request):
 def partial_res(request):
     data = dict()
     if request.method == 'POST':
+        # court_nam = request.POST.get('court')
+        # print(court_nam)
+        # court = Court.objects.get(court_name=court_nam)
+        # print(court)
         form = ReservationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', {'form': form})
+        #if form.is_valid():
+        print('ndjanddsknsf')
+        res = form.save(commit=False)
+        print(res)
+        res.user = request.user
+        res.save()
+        data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', {'form': form}, request)
 
     else:
         form = ReservationForm()

@@ -93,8 +93,9 @@
               var d = new Date();
               var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
               $("#id_booking_date").val(datestring);
-              $("#id_court").val(court_name);
-              document.getElementById('id_court').readOnly = true
+              //$("#id_court").val('2').change()
+              $("#id_court option:contains("+court_name+")").prop('selected', true);
+              //document.getElementById('id_court').readOnly = true
             },
           });
 

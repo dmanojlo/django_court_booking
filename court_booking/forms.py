@@ -42,8 +42,11 @@ class CourtForm(forms.ModelForm):
 
 
 class ReservationForm(forms.ModelForm):
+    #with required = False we can disable vakidation on field
+    #court = forms.CharField(required=False)
 
     class Meta:
+        
         model = Reservation
         fields = ('start_time', 'end_time', 'booking_date', 'court')
         widgets = {
