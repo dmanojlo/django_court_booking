@@ -24,12 +24,12 @@ def home(request):
     data = dict()
     #used to get a list of  single field in model
     courts = list(Court.objects.values_list('court_name', flat=True))
-    if request.method == 'POST':
-        form = ReservationForm(request.POST)
-    else:
-        form = ReservationForm()
+    # if request.method == 'POST':
+    #     form = ReservationForm(request.POST)
+    # else:
+    #     form = ReservationForm()
 
-    context = {'form':form, 'courts':courts}
+    context = {'courts':courts}
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
     return render(request, 'court_booking/home.html', context)

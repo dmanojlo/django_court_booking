@@ -88,14 +88,29 @@
               $("#modal-book .modal-content").html(data.html_form);
               $("#id_start_time").val(startTime);
               document.getElementById('id_start_time').readOnly = true
+
               var fillEndTime = parseInt(startTime, 10) + 1 + ":" + startTime[3] + startTime[4] + ":00";
               $("#id_end_time").val(fillEndTime);
+              //to remove dropdown options less than some value
+              $('#id_end_time option').filter(function() {
+                  return $(this).val() < fillEndTime;
+              }).remove();
+
               var d = new Date();
               var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
               $("#id_booking_date").val(datestring);
-              //$("#id_court").val('2').change()
-              $("#id_court option:contains("+court_name+")").prop('selected', true);
-              //document.getElementById('id_court').readOnly = true
+
+              //to set selected field in dropdown
+              $("#id_court option:contains("+court_name+")").prop('selected', true)
+              //$("#id_court").prop('disabled', true)
+              //$('#id_court option:not(:selected)').remove()
+              //to disable click on dropdown
+              $('#id_court').on('mousedown', function(e) {
+                  e.preventDefault();
+                  this.blur();
+                  window.focus();
+                });
+                $('#id_court').css({'background-color': '#e9ecef', 'appearance':'none'})
             },
           });
 
@@ -159,8 +174,23 @@
                 $("#izdano-table tbody").html(data.html_izdano_list);
                 $("#modal-book").modal("hide");
                 //console.log(data.html_izdano_list)
+
               } else {
                 $("#modal-book .modal-content").html(data.html_form);
+
+                var start_time = $("#id_start_time").val();
+                var end_time = $("#id_end_time option:selected").text();
+                var court_name = $("#id_court option:selected").text();
+
+                //for setting the occupied court by clicking on table column
+                //pointer-events is used to make element unclickable
+                $("td[data-courts='"+court_name+"']").find("div").each(function() {
+                  if ( ($(this).attr('data-time') >= start_time) && ($(this).attr('data-time') < end_time) ) {
+                    $(this).css({"background":"red", "pointer-events":"none"});
+                  }
+                });
+
+                $("#modal-book").modal("hide");
               }
             },
           });
