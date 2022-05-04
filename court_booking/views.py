@@ -27,6 +27,7 @@ def home(request, month, day):
     data = dict()
     #used to get a list of  single field in model
     courts = list(Court.objects.values_list('court_name', flat=True))
+    name = 'Pero'
     # year = date.today().year
     # month = date.today().month
     # cal = HTMLCalendar().formatmonth(year, month)
@@ -35,11 +36,15 @@ def home(request, month, day):
     #     form = ReservationForm(request.POST)
     # else:
     #     form = ReservationForm()
-
-    context = {'courts':courts,}
+    context = {'courts':courts,'name':name}
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
-    return render(request, 'court_booking/home.html', context)
+    book_date = Reservation.objects.filter(booking_date__day=day)
+    print(book_date)
+    if day == 6:
+        return render(request, 'court_booking/home.html', context)
+    else:
+        return render(request, 'court_booking/home.html', context)
 
 def partial_res(request):
     data = dict()
