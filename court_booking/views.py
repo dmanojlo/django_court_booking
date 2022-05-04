@@ -15,21 +15,28 @@ from django.core.cache import cache
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Reservation, Court
 from .forms import ReservationForm, SignupForm, CourtForm
+import calendar
+from calendar import HTMLCalendar
+from datetime import date
 
 # Create your views here.
 
 import json
 
-def home(request):
+def home(request, month, day):
     data = dict()
     #used to get a list of  single field in model
     courts = list(Court.objects.values_list('court_name', flat=True))
+    # year = date.today().year
+    # month = date.today().month
+    # cal = HTMLCalendar().formatmonth(year, month)
+
     # if request.method == 'POST':
     #     form = ReservationForm(request.POST)
     # else:
     #     form = ReservationForm()
 
-    context = {'courts':courts}
+    context = {'courts':courts,}
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
     return render(request, 'court_booking/home.html', context)

@@ -7,6 +7,6 @@ from .views import home, partial_res
 app_name = 'court_booking' # za url putanju do appa
 
 urlpatterns = [
-     path('home/', home , name='home'),
+     path('home/<int:month>/<int:day>/', home , name='home'),
      path('partial_res/', partial_res , name='partial_res'),
      ]
