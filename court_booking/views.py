@@ -18,7 +18,7 @@ from .forms import ReservationForm, SignupForm, CourtForm
 import calendar
 from calendar import HTMLCalendar
 from datetime import date
-
+from django.db.models import F
 # Create your views here.
 
 import json
@@ -36,15 +36,12 @@ def home(request, month, day):
     #     form = ReservationForm(request.POST)
     # else:
     #     form = ReservationForm()
-    context = {'courts':courts,'name':name}
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
-    book_date = Reservation.objects.filter(booking_date__day=day)
+    book_date = list(Reservation.objects.filter(booking_date__day=day).values('start_time', 'end_time', 'court__court_name'))
     print(book_date)
-    if day == 6:
-        return render(request, 'court_booking/home.html', context)
-    else:
-        return render(request, 'court_booking/home.html', context)
+    context = {'courts':courts,'name':name, 'book_date':book_date}
+    return render(request, 'court_booking/home.html', context)
 
 def partial_res(request):
     data = dict()

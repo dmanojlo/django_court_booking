@@ -61,9 +61,11 @@
 
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script src="{% static 'js/dataset.js' %}"></script>
+    {{ book_date |json_script:"reservation" }}
     {{ courts |json_script:"num_courts" }}
     <!-- safe way to include django variables to javascript -->
     <script type="text/javascript">var num_of_courts = JSON.parse(document.getElementById('num_courts').textContent);</script>
+    <script type="text/javascript">var book_date = JSON.parse(document.getElementById('reservation').textContent);</script>
     <script src="{% static 'js/easycal.js' %}"></script>
 
     <script>
@@ -165,6 +167,19 @@
     </script>
 
     <script type="text/javascript">
+$(document).ready(function() {
+
+      //iteration of array of dictionaries with jquery
+      $.each(book_date,function(index,value){ 
+              console.log(value.start_time.slice(0, -3), value.court__court_name)
+            $("td[data-courts='"+value.court__court_name+"']").find("div").each(function() {
+                  if ( ($(this).attr('data-time') >= value.start_time.slice(0, -3)) && ($(this).attr('data-time') < value.end_time.slice(0, -3)) ) {
+                    $(this).css({"background":"red", "pointer-events":"none"});
+                  }
+                });
+
+      });
+
       $(function () {
         /* Functions */
 
@@ -233,6 +248,7 @@
         $("#izdano-table").on("click", ".js-delete-izdano", loadForm);
         $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
       });
+    });
     </script>
 
     {% block javascript %}{% endblock %}
