@@ -98,6 +98,7 @@
 
         dayClick: function (el, startTime) {
           //to get the closest td  of clicked element
+          var md = {{md}}
           var court_name = $(el).closest('td').attr("data-courts");
           console.log(court_name)
           $.ajax({
@@ -105,11 +106,18 @@
             type: "get",
             dataType: "json",
             beforeSend: function () {
+              
+              if ($(el).next().css("background-color") == "rgb(255, 0, 0)") {
+                alert("1 hour is a minimum reservation")
+              }
+              else{
               $("#modal-book .modal-content").html("");
               $("#modal-book").modal("show");
+              }
             },
             success: function (data) {
               $("#modal-book .modal-content").html(data.html_form);
+
               $("#id_start_time").val(startTime);
               document.getElementById('id_start_time').readOnly = true
 
@@ -120,8 +128,10 @@
                   return $(this).val() < fillEndTime;
               }).remove();
 
+              //get today date
               var d = new Date();
-              var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+              //var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+              var datestring = ("0" + md[1]).slice(-2) + "." + ("0" + (md[0])).slice(-2) + "." + d.getFullYear();
               $("#id_booking_date").val(datestring);
 
               //to set selected field in dropdown
@@ -135,6 +145,7 @@
                   window.focus();
                 });
                 $('#id_court').css({'background-color': '#e9ecef', 'appearance':'none'})
+
             },
           });
 
@@ -169,9 +180,8 @@
     <script type="text/javascript">
 $(document).ready(function() {
 
-      //iteration of array of dictionaries with jquery
-      $.each(book_date,function(index,value){ 
-              console.log(value.start_time.slice(0, -3), value.court__court_name)
+      //iteration of array of dictionaries with jquery, setting the color to booked time
+      $.each(book_date,function(index,value){
             $("td[data-courts='"+value.court__court_name+"']").find("div").each(function() {
                   if ( ($(this).attr('data-time') >= value.start_time.slice(0, -3)) && ($(this).attr('data-time') < value.end_time.slice(0, -3)) ) {
                     $(this).css({"background":"red", "pointer-events":"none"});

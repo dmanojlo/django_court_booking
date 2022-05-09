@@ -39,8 +39,8 @@ def home(request, month, day):
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
     book_date = list(Reservation.objects.filter(booking_date__day=day).values('start_time', 'end_time', 'court__court_name'))
-    print(book_date)
-    context = {'courts':courts,'name':name, 'book_date':book_date}
+    md = [month, day]
+    context = {'courts':courts,'name':name, 'book_date':book_date, 'md':md}
     return render(request, 'court_booking/home.html', context)
 
 def partial_res(request):
