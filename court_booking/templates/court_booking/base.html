@@ -40,11 +40,8 @@
     {% block content%} {% endblock %}
 
     <!-- JavaScript Libraries -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+<div id="cal-tab">
+
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -68,9 +65,14 @@
     <script type="text/javascript">var book_date = JSON.parse(document.getElementById('reservation').textContent);</script>
     <script src="{% static 'js/easycal.js' %}"></script>
 
+
     <script>
 
-    $(document).ready(function() {
+$(document).ready(function() {
+
+  $(document).on('click', '#calendar', function(e) {
+             alert( 'You clicked me' );
+       })
 
       $('#calendar').datepicker({
        inline: true,
@@ -79,15 +81,46 @@
        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
        dateFormat: "dd-mm-yy",
        onSelect: function (date) {
+         $( "ui-datepicker-week-end" ).on( "click", function() {
+          alert("grgdggd")
+          });
          var date = $(this).datepicker('getDate'),
             day  = date.getDate(),
             month = date.getMonth() + 1,
             year =  date.getFullYear();
-       window.location="http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/"
+            console.log(date)
+
+            // $('.loaded').load("http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/")
+
+            // $('.loaded').load("http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/"  ,function(data){
+            //   console.log(data)
+            //   var scripts = $(data).find("scripts");
+            //
+            // });
+
+
+          //   $('.loaded').load("http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/" + " .mycal", function(responseText, textStatus, XMLHttpRequest) {
+          //   $('.mycal').easycal();
+          // })
+
+          //To get the a reference to the div use .filter() if .find() is not working
+          $.get("http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/",function(r){
+            //console.log(els)
+            var els = $(r).filter("#cal-tab")
+            console.log(els)
+            //$('.loaded').html('<div class="mycal" style="width: 100%"></div>"').append($(r).filter("#cal-tab"))
+            $('.mycal').remove()
+            $(r).filter(".mycal").insertAfter('#calendar')
+            $('#cal-tab').remove()
+            $(r).filter("#cal-tab").insertAfter(".loaded")
+        });
+
+
+       //      $( "#calendar" ).datepicker( { defaultDate: '+1m'} );
+       //window.location="http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/"
       //date.toString() is now in dd-mm-yyyy format, change it to meet your requirements
         }
-      });
-
+      })
 
       $(".mycal").easycal({
         timeFormat: "HH:mm",
@@ -106,7 +139,7 @@
             type: "get",
             dataType: "json",
             beforeSend: function () {
-              
+
               if ($(el).next().css("background-color") == "rgb(255, 0, 0)") {
                 alert("1 hour is a minimum reservation")
               }
@@ -173,8 +206,10 @@
         overlapColor: "#FF0",
         overlapTextColor: "#000",
         overlapTitle: "Multiple",
-      });
-      });
+      })
+});
+
+
     </script>
 
     <script type="text/javascript">
@@ -260,6 +295,8 @@ $(document).ready(function() {
       });
     });
     </script>
+
+  </div>
 
     {% block javascript %}{% endblock %}
   </body>

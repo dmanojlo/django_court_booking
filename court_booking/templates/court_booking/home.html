@@ -1,16 +1,21 @@
 {% extends 'court_booking/base.html' %} {% block content %}
 
 
+
+
 <div id="calendar"></div>
 
-<div class="mycal" style="width: 100%"></div>
+<div class="mycal" style="width: 100%">
+</div>
 
 <div class="modal fade" id="modal-book">
   <div class="modal-dialog">
     <div class="modal-content"></div>
   </div>
 </div>
- <p>Username -->  {{ request.user }} {{ name }}</p>
+
+<div class="loaded"></div>
+
 
 <!-- THE MODAL WE WILL BE USING -->
 <!-- <div class="modal fade" id="modal-timeslot">

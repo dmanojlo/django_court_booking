@@ -23,7 +23,8 @@ from django.db.models import F
 
 import json
 
-def home(request, month, day):
+#we need to set deafult arguments to go to curretn month and day
+def home(request, month=date.today().month, day=date.today().day):
     data = dict()
     #used to get a list of  single field in model
     courts = list(Court.objects.values_list('court_name', flat=True))
