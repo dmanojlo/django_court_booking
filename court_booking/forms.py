@@ -42,7 +42,7 @@ class CourtForm(forms.ModelForm):
 
 
 class ReservationForm(forms.ModelForm):
-    #with required = False we can disable vakidation on field
+    #with required = False we can disable validation on field
     #court = forms.CharField(required=False)
 
     class Meta:

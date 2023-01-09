@@ -23,6 +23,10 @@ from django.db.models import F
 
 import json
 
+
+def index(request):
+    return render(request, 'court_booking/index.html', {})
+
 #we need to set deafult arguments to go to curretn month and day
 def home(request, month=date.today().month, day=date.today().day):
     data = dict()
@@ -39,8 +43,9 @@ def home(request, month=date.today().month, day=date.today().day):
     #     form = ReservationForm()
     #data['html_form'] = render_to_string('court_booking/home.html', context, request)
     #return JsonResponse(data)
-    book_date = list(Reservation.objects.filter(booking_date__day=day).values('start_time', 'end_time', 'court__court_name'))
+    book_date = list(Reservation.objects.filter(booking_date__day=day, booking_date__month=month).values('start_time', 'end_time', 'court__court_name'))
     md = [month, day]
+    print(md)
     context = {'courts':courts,'name':name, 'book_date':book_date, 'md':md}
     return render(request, 'court_booking/home.html', context)
 

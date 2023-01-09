@@ -40,7 +40,6 @@
     {% block content%} {% endblock %}
 
     <!-- JavaScript Libraries -->
-<div id="cal-tab">
 
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -58,21 +57,22 @@
 
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script src="{% static 'js/dataset.js' %}"></script>
-    {{ book_date |json_script:"reservation" }}
-    {{ courts |json_script:"num_courts" }}
-    <!-- safe way to include django variables to javascript -->
-    <script type="text/javascript">var num_of_courts = JSON.parse(document.getElementById('num_courts').textContent);</script>
-    <script type="text/javascript">var book_date = JSON.parse(document.getElementById('reservation').textContent);</script>
-    <script src="{% static 'js/easycal.js' %}"></script>
 
 
-    <script>
+<div id="cal-tab">
+
+  {{ book_date |json_script:"reservation" }}
+  {{ courts |json_script:"num_courts" }}
+  <!-- safe way to include django variables to javascript -->
+  <script type="text/javascript">var num_of_courts = JSON.parse(document.getElementById('num_courts').textContent);</script>
+  <script type="text/javascript">var book_date = JSON.parse(document.getElementById('reservation').textContent);</script>
+  <script src="{% static 'js/easycal.js' %}"></script>
+
+  <script>
+
 
 $(document).ready(function() {
 
-  $(document).on('click', '#calendar', function(e) {
-             alert( 'You clicked me' );
-       })
 
       $('#calendar').datepicker({
        inline: true,
@@ -220,10 +220,24 @@ $(document).ready(function() {
             $("td[data-courts='"+value.court__court_name+"']").find("div").each(function() {
                   if ( ($(this).attr('data-time') >= value.start_time.slice(0, -3)) && ($(this).attr('data-time') < value.end_time.slice(0, -3)) ) {
                     $(this).css({"background":"red", "pointer-events":"none"});
+                    //$("div[data-time='"+$(this).attr('data-time')+"']").off()
+                    //with $(this).off(); we disable click event
+                    $(this).off();  
                   }
                 });
 
       });
+
+      // $(function(){
+      //   $("div[data-time='09:30']").click(function(event) {
+      //   alert('gooooo')
+      // });
+      // });
+
+      //with off() we disable event handlers(click and other events)
+      // $(function(){
+      //   $("div[data-time='09:30']").off()
+      // });
 
       $(function () {
         /* Functions */
@@ -295,8 +309,9 @@ $(document).ready(function() {
       });
     });
     </script>
-
   </div>
+
+  <div class="loaded"></div>
 
     {% block javascript %}{% endblock %}
   </body>
