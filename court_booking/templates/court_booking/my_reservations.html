@@ -1,0 +1,5 @@
+<h1>My Reservations</h1>
+<p>{{request.user}}</p>
+{% for res in reservations %}
+<p>{{res.booking_date|date:"d.m.Y"}}, {{res.start_time|time:"H:i"}} - {{res.end_time|time:"H:i"}}, {{res.court}}</p>
+{% endfor %}

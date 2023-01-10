@@ -27,6 +27,7 @@ import json
 def index(request):
     return render(request, 'court_booking/index.html', {})
 
+@login_required(login_url='account_login')
 #we need to set deafult arguments to go to curretn month and day
 def home(request, month=date.today().month, day=date.today().day):
     data = dict()
@@ -70,3 +71,9 @@ def partial_res(request):
     context = {'form':form}
     data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', context, request)
     return JsonResponse(data)
+
+
+def my_reservations(request):
+    reservations = Reservation.objects.filter(user=request.user)
+    context = {'reservations': reservations}
+    return render(request, 'court_booking/my_reservations.html', context)
