@@ -1,5 +1,6 @@
 <h1>My Reservations</h1>
 <p>{{request.user}}</p>
 {% for res in reservations %}
+<a href="{% url 'court_booking:delete_res' res.id %}">Delete</a>
 <p>{{res.booking_date|date:"d.m.Y"}}, {{res.start_time|time:"H:i"}} - {{res.end_time|time:"H:i"}}, {{res.court}}</p>
 {% endfor %}

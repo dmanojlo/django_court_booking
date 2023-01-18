@@ -77,3 +77,10 @@ def my_reservations(request):
     reservations = Reservation.objects.filter(user=request.user)
     context = {'reservations': reservations}
     return render(request, 'court_booking/my_reservations.html', context)
+
+def delete_res(request,pk):
+    res = Reservation.objects.get(id=pk)
+    if request.method == 'POST':
+        res.delete()
+        return redirect('court_booking:home')
+    return render(request, 'court_booking/delete.html', {'obj':res})
