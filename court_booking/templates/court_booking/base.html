@@ -70,9 +70,7 @@
 
   <script>
 
-
 $(document).ready(function() {
-
 
       $('#calendar').datepicker({
        inline: true,
@@ -107,108 +105,113 @@ $(document).ready(function() {
           $.get("http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/",function(r){
             //console.log(els)
             var els = $(r).filter("#cal-tab")
-            console.log(els)
+            console.log(els);
             //$('.loaded').html('<div class="mycal" style="width: 100%"></div>"').append($(r).filter("#cal-tab"))
-            $('.mycal').remove()
-            $(r).filter(".mycal").insertAfter('#calendar')
-            $('#cal-tab').remove()
-            $(r).filter("#cal-tab").insertAfter(".loaded")
+            $('.mycal').remove();
+            $(r).filter(".mycal").insertAfter('#calendar');
+            $('#cal-tab').remove();
+            $(r).filter("#cal-tab").insertAfter(".loaded");
+          
         });
 
 
        //      $( "#calendar" ).datepicker( { defaultDate: '+1m'} );
        //window.location="http://127.0.0.1:8000/book/home/" + month.toString() + "/" + day.toString() + "/"
       //date.toString() is now in dd-mm-yyyy format, change it to meet your requirements
+
+
         }
-      })
+
+        
+      });
 
       $(".mycal").easycal({
-        timeFormat: "HH:mm",
-        columnDateFormat: "dddd, DD MMM",
-        minTime: "09:00",
-        maxTime: "19:00",
-        slotDuration: 30,
+          
+          timeFormat: "HH:mm",
+          columnDateFormat: "dddd, DD MMM",
+          minTime: "09:00",
+          maxTime: "19:00",
+          slotDuration: 30,
+          dayClick: function (el, startTime) {
+  
+            //to get the closest td  of clicked element
+            var md = {{md}}
+            var court_name = $(el).closest('td').attr("data-courts");
+            console.log(court_name)
+            $.ajax({
+              url: "/book/partial_res/",
+              type: "get",
+              dataType: "json",
+              beforeSend: function () {
+  
+                if ($(el).next().css("background-color") == "rgb(255, 0, 0)") {
+                  alert("1 hour is a minimum reservation")
+                }
+                else{
+                $("#modal-book .modal-content").html("");
+                $("#modal-book").modal("show");
+                }
+              },
+              success: function (data) {
+                $("#modal-book .modal-content").html(data.html_form);
+  
+                $("#id_start_time").val(startTime);
+                document.getElementById('id_start_time').readOnly = true
+  
+                var fillEndTime = parseInt(startTime, 10) + 1 + ":" + startTime[3] + startTime[4] + ":00";
+                $("#id_end_time").val(fillEndTime);
+                //to remove dropdown options less than some value
+                $('#id_end_time option').filter(function() {
+                    return $(this).val() < fillEndTime;
+                }).remove();
+  
+                //get today date
+                var d = new Date();
+                //var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
+                var datestring = ("0" + md[1]).slice(-2) + "." + ("0" + (md[0])).slice(-2) + "." + d.getFullYear();
+                $("#id_booking_date").val(datestring);
+  
+                //to set selected field in dropdown
+                $("#id_court option:contains("+court_name+")").prop('selected', true)
+                //$("#id_court").prop('disabled', true)
+                //$('#id_court option:not(:selected)').remove()
+                //to disable click on dropdown
+                $('#id_court').on('mousedown', function(e) {
+                    e.preventDefault();
+                    this.blur();
+                    window.focus();
+                  });
+                  $('#id_court').css({'background-color': '#e9ecef', 'appearance':'none'});
+              },
+            });
+  
+            // $("#modal-timeslot").modal('show');
+  
+            // $('.ec-slot').click(function () {
+            //   var name = $(this).closest('td').attr("data-date");
+            //   console.log(name)
+            //     //console.log($(this).data('time'));
+            //     //Check to see if background color is set or if it's set to white.
+            //     if(this.style.background == "" || this.style.background =="white") {
+            //         $(this).css('background', 'red');
+            //     }
+            //     else {
+            //         $(this).css('background', 'white');
+            //     }
+            // });
+  
+            console.log("Slot selected: " + startTime);
+          },
+          eventClick: function (eventId) {
+            console.log("Event was clicked with id: " + eventId);
+          },
+  
+          overlapColor: "#FF0",
+          overlapTextColor: "#000",
+          overlapTitle: "Multiple",
+        });
 
-        dayClick: function (el, startTime) {
-          //to get the closest td  of clicked element
-          var md = {{md}}
-          var court_name = $(el).closest('td').attr("data-courts");
-          console.log(court_name)
-          $.ajax({
-            url: "/book/partial_res/",
-            type: "get",
-            dataType: "json",
-            beforeSend: function () {
-
-              if ($(el).next().css("background-color") == "rgb(255, 0, 0)") {
-                alert("1 hour is a minimum reservation")
-              }
-              else{
-              $("#modal-book .modal-content").html("");
-              $("#modal-book").modal("show");
-              }
-            },
-            success: function (data) {
-              $("#modal-book .modal-content").html(data.html_form);
-
-              $("#id_start_time").val(startTime);
-              document.getElementById('id_start_time').readOnly = true
-
-              var fillEndTime = parseInt(startTime, 10) + 1 + ":" + startTime[3] + startTime[4] + ":00";
-              $("#id_end_time").val(fillEndTime);
-              //to remove dropdown options less than some value
-              $('#id_end_time option').filter(function() {
-                  return $(this).val() < fillEndTime;
-              }).remove();
-
-              //get today date
-              var d = new Date();
-              //var datestring = ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
-              var datestring = ("0" + md[1]).slice(-2) + "." + ("0" + (md[0])).slice(-2) + "." + d.getFullYear();
-              $("#id_booking_date").val(datestring);
-
-              //to set selected field in dropdown
-              $("#id_court option:contains("+court_name+")").prop('selected', true)
-              //$("#id_court").prop('disabled', true)
-              //$('#id_court option:not(:selected)').remove()
-              //to disable click on dropdown
-              $('#id_court').on('mousedown', function(e) {
-                  e.preventDefault();
-                  this.blur();
-                  window.focus();
-                });
-                $('#id_court').css({'background-color': '#e9ecef', 'appearance':'none'})
-
-            },
-          });
-
-          // $("#modal-timeslot").modal('show');
-
-          // $('.ec-slot').click(function () {
-          //   var name = $(this).closest('td').attr("data-date");
-          //   console.log(name)
-          //     //console.log($(this).data('time'));
-          //     //Check to see if background color is set or if it's set to white.
-          //     if(this.style.background == "" || this.style.background =="white") {
-          //         $(this).css('background', 'red');
-          //     }
-          //     else {
-          //         $(this).css('background', 'white');
-          //     }
-          // });
-
-          console.log("Slot selected: " + startTime);
-        },
-        eventClick: function (eventId) {
-          console.log("Event was clicked with id: " + eventId);
-        },
-
-        overlapColor: "#FF0",
-        overlapTextColor: "#000",
-        overlapTitle: "Multiple",
-      })
 });
-
 
     </script>
 
@@ -243,6 +246,7 @@ $(document).ready(function() {
         /* Functions */
 
         var loadForm = function () {
+          console.log("loadtralala");
           var btn = $(this);
           $.ajax({
             url: btn.attr("data-url"),
@@ -259,6 +263,7 @@ $(document).ready(function() {
         };
 
         var saveForm = function () {
+          console.log("savelalal");
           var form = $(this);
           $.ajax({
             url: form.attr("action"),
@@ -270,7 +275,6 @@ $(document).ready(function() {
                 $("#izdano-table tbody").html(data.html_izdano_list);
                 $("#modal-book").modal("hide");
                 //console.log(data.html_izdano_list)
-
               } else {
                 $("#modal-book .modal-content").html(data.html_form);
 
@@ -297,6 +301,7 @@ $(document).ready(function() {
 
         // Create book
         $(".js-create-book").click(loadForm);
+        $("#modal-book").off();
         $("#modal-book").on("submit", ".js-izdano-create-form", saveForm);
 
         // Update book
@@ -308,6 +313,7 @@ $(document).ready(function() {
         $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
       });
     });
+
     </script>
   </div>
 

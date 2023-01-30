@@ -28,7 +28,7 @@ def index(request):
     return render(request, 'court_booking/index.html', {})
 
 @login_required(login_url='account_login')
-#we need to set deafult arguments to go to curretn month and day
+#we need to set default arguments to go to current month and day
 def home(request, month=date.today().month, day=date.today().day):
     data = dict()
     #used to get a list of  single field in model
@@ -82,5 +82,5 @@ def delete_res(request,pk):
     res = Reservation.objects.get(id=pk)
     if request.method == 'POST':
         res.delete()
-        return redirect('court_booking:home')
+        return redirect('court_booking:my_reservations')
     return render(request, 'court_booking/delete.html', {'obj':res})

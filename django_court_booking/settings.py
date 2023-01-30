@@ -92,6 +92,10 @@ DATABASES = {
 }
 
 
+#allauth redirect
+LOGIN_REDIRECT_URL='court_booking:home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
