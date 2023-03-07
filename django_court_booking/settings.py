@@ -47,7 +47,8 @@ INSTALLED_APPS = [
 
 
     # own apps
-    'court_booking'
+    'court_booking',
+    'schedule',
 ]
 
 MIDDLEWARE = [

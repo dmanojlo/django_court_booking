@@ -76,7 +76,7 @@
 @media screen and (max-width: 480px) {
 
 	html, body{
-		
+
 		height: 100%;
 	}
 	.easycal-widget{
@@ -84,15 +84,17 @@
 		overflow-x: scroll;
 		overflow-y: visible;
 		padding: 0;
+		
 	}
 
 	.easycal table{
 		width: 500px;
-	
+		
 	}
 
 	.easycal{
 		width: 500px;
+
 	}
 
 	table{
@@ -105,18 +107,28 @@
 
 	.easycal table.ec-head-table tr td:FIRST-CHILD {
 		border-left: 0;
-		width: 100px;
+		width: 100px;	
+
 	}
 
 	.easycal table.ec-time-grid-table tr td:FIRST-CHILD {
 		border-left: 0;
 		width: 100px;
+		
 	}
 
 	 .easycal table.ec-time-grid-table tr td:FIRST-CHILD {
 		
-		position: absolute;
+		position: sticky;
 		border-right: 0;
+
+	}
+
+	.ec-day-header{
+		
+	}
+
+	.ec-slot-col{
 		
 	}
 
