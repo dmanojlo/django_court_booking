@@ -182,7 +182,7 @@
   }
   .ui-datepicker-prev:after {
 	transform: rotate(45deg);
-	margin: -43px 0px 0px 8px;
+	margin: -45px 0px 0px 6px;
   }
   .ui-datepicker-next {
 	float: right;
@@ -190,15 +190,15 @@
   }
   .ui-datepicker-next:after {
 	transform: rotate(-135deg);
-	margin: -43px 0px 0px 6px;
+	margin: -45px 0px 0px 4px;
   }
   .ui-datepicker-prev:after,
   .ui-datepicker-next:after {
 	content: '';
 	position: absolute;
 	display: block;
-	width: 4px;
-	height: 4px;
+	width: 7px;
+	height: 7px;
 	border-left: 2px solid #b0aead;
 	border-bottom: 2px solid #b0aead;
   }
