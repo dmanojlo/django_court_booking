@@ -1,46 +1,141 @@
-{% extends "account/base.html" %}
-
+{% load static %}
 {% load i18n %}
 {% load account socialaccount %}
+{% load widget_tweaks %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
 
-{% block content %}
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Tennis Center</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+  <body class="is-preload">
 
-<h1>{% trans "Sign In" %}</h1>
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
 
-{% get_providers as socialaccount_providers %}
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Tennis Center</a></h1>
+					</header>
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>LOGIN</h2>
 
-<div class="socialaccount_ballot">
+                {% get_providers as socialaccount_providers %}
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+                  {% if socialaccount_providers %}
+                  <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-  <div class="login-or">{% trans 'or' %}</div>
+                  <div class="socialaccount_ballot">
 
-</div>
+                    <ul class="socialaccount_providers">
+                      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                    </ul>
 
-{% include "socialaccount/snippets/login_extra.html" %}
+                    <div class="login-or">{% trans 'or' %}</div>
 
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
+                  </div>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+                  {% include "socialaccount/snippets/login_extra.html" %}
 
-{% endblock %}
+                  {% else %}
+                  <p>If you have not created an account yet, then
+                  <a href="{% url 'account_signup' %}" style="font-weight: bold;">Please register</a> first.</p>
+                  {% endif %}
+								<form method="post" novalidate>
+                  {% csrf_token %}
+                  {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+              {% endfor %}
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                  {% for error in form.non_field_errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+              
+              {% for field in form.visible_fields %}
+                <div class="form-group">
+                  <!-- exclude remember me field with if conditional -->
+                  {% if field != form.remember %}
+                  {{ field.label_tag }}
+              
+                  {% if form.is_bound %}
+                    {% if field.errors %}
+                      {% render_field field class="form-control is-invalid" placeholder='' %}
+                      {% for error in field.errors %}
+                        <div class="invalid-feedback">
+                          {{ error }}
+                        </div>
+                      {% endfor %}
+                    {% else %}
+                      {% render_field field class="form-control" placeholder='' %}
+                    {% endif %}
+                  {% else %}
+                    {% render_field field class="form-control" placeholder='' %}
+                  {% endif %}
+              
+                  {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                  <span class="glyphicon glyphicon-ok"></span> Login
+                </button>
+                <a href="" class="btn btn-default" style="margin-left: 15px;">Cancel</a>
+              </div>
+                </form>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+                  <h2 class="major">Get in touch</h2>
+                  <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+    
+                  <ul class="contact">
+                    <li class="icon solid fa-home">
+                      Untitled Inc<br />
+                      1234 Somewhere Road Suite #2894<br />
+                      Nashville, TN 00000-0000
+                    </li>
+                    <li class="icon solid fa-phone">(000) 000-0000</li>
+                    <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+                    <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+                    <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
+                    <li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+                  </ul>
+                  <ul class="copyright">
+                    <li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                  </ul>
+
+								</div>
+							</div>
+
+					</section>
+
+			</div>
+
+	</body>
+</html>

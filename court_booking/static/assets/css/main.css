@@ -18,7 +18,7 @@ tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
-	margin: 0;
+
 	padding: 0;
 	border: 0;
 	font-size: 100%;
@@ -31,6 +31,10 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+}
+
+.form-group{
+	margin-top: 20px;
 }
 
 ol, ul {
@@ -127,7 +131,6 @@ input, select, textarea {
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16.5pt;
 		font-weight: 300;
-		line-height: 1.65;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -2213,6 +2216,7 @@ input, select, textarea {
 		select:focus,
 		textarea:focus {
 			border-color: #5b6ba6;
+			background: transparent;
 		}
 
 	select {
