@@ -23,15 +23,17 @@
 
 
     <link rel="stylesheet" href="{% static 'css/easycal.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+
+    {% block head %} {% endblock %}
 
   </head>
   <body>
-    {% block content%} {% endblock %}
+    {% block content %} {% endblock %}
 
     <!-- JavaScript Libraries -->
 

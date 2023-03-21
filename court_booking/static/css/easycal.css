@@ -103,12 +103,13 @@
 	.ec-time{
 		
 	}
-
+     
+	/* with this two classes below we can set background-color to be the same as on the table on the right side and we have the horizontal scroll effect  */
 	.easycal table.ec-head-table tr td:FIRST-CHILD {
 		position: sticky;
     	left: 0;
 		z-index: 1;
-		background-color: #ffffff;
+		background-color: #3b5426;
 		
 
 	}
@@ -117,7 +118,7 @@
 		position: sticky;
     	left: 0;
 		z-index: 1;
-		background-color: #ffffff;
+		background-color: #3b5426;
 		
 	}
 
@@ -154,7 +155,7 @@
 
 	height: 50px;
 	line-height: 50px;
-	background: #e9e5e3;
+	background: #98c38e87;
 	margin-bottom: 10px;
 	
 	
@@ -170,7 +171,7 @@
 	width: 20px;
 	height: 20px;
 	text-indent: 9999px;
-	border: 2px solid #b0aead;
+	border: 2px solid #ffffff;
 	border-radius: 100%;
 	cursor: pointer;
 	overflow: hidden;
@@ -199,8 +200,8 @@
 	display: block;
 	width: 7px;
 	height: 7px;
-	border-left: 2px solid #b0aead;
-	border-bottom: 2px solid #b0aead;
+	border-left: 2px solid #ffffff;
+	border-bottom: 2px solid #ffffff;
   }
   .ui-datepicker-prev:hover,
   .ui-datepicker-next:hover,
@@ -214,7 +215,7 @@
  
   .ui-datepicker-calendar thead tr th span {
 	display: block;
-	color: #00a8b2;
+	color: #ffffff;
 	margin-bottom: 5px;
 	text-align: center;
   }
@@ -228,7 +229,7 @@
 	width: 45px;
 	line-height: 45px;
 	text-decoration: none;
-	color: #000000;
+	color: #ffffff;
   }
   .ui-state-default:hover {
 	background: rgba(0,0,0,0.02);
@@ -244,7 +245,21 @@
     color: white;
   }
   .ui-datepicker-unselectable .ui-state-default {
-	color: #eee;
+	color: #b2bfb5;
 	border: 2px solid transparent;
   }
   
+
+  .res-page-table{
+	border-collapse: separate;
+  	border-spacing: 0 12px;
+	text-align: center;
+  }
+
+  .res-tbody-table {
+	border: 1px solid white;
+  }
+  
+  .res-tbody-table td{
+	padding: 0.75em 0.75em;
+  }
