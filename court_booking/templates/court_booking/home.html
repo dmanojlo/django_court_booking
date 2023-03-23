@@ -4,8 +4,22 @@
 
 {% block content %}
 
-<h2>Tennis Center</h2>
-<a href="{% url 'account_logout' %}" class="btn btn-primary py-md-3 px-md-5 me-3">Logout</a>
+<div class="dis-flex">
+<h2 class="head-login">Tennis Center</h2>
+
+<div class="dropdown">
+<p href="#" class="image-profile"><img class="image-size" src="{% static 'images/profile.png' %}" alt="" />
+  <span>{{request.user}}</span>
+  <i class="fa fa-angle-down"></i>
+  <div class="dropdown-content">
+    <a href="{% url 'court_booking:my_reservations' %}">My reservations</a>
+    <a href="{% url 'account_logout' %}">Logout</a>
+  </div>
+</p>
+</div>
+
+</div>
+
 <div id="calendar"></div>
 
 
@@ -17,7 +31,6 @@
     <div class="modal-content"></div>
   </div>
 </div>
-
 
 <!-- THE MODAL WE WILL BE USING -->
 <!-- <div class="modal fade" id="modal-timeslot">

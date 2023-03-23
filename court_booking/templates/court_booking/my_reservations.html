@@ -1,8 +1,25 @@
 {% extends 'court_booking/base.html' %} 
+{% load static %}
 
 {% block content %}
-<h1>My Reservations</h1>
-<p>{{request.user}}</p>
+
+<div class="dis-flex">
+    <h2 class="head-login">Tennis Center</h2>
+    
+    <div class="dropdown">
+    <p href="#" class="image-profile"><img class="image-size" src="{% static 'images/profile.png' %}" alt="" />
+      <span>{{request.user}}</span>
+      <i class="fa fa-angle-down"></i>
+      <div class="dropdown-content">
+        <a href="{% url 'court_booking:home' %}">Court booking</a>
+        <a href="{% url 'account_logout' %}">Logout</a>
+      </div>
+    </p>
+    </div>
+    
+</div>
+
+<h2 style="text-align: center;">My reservations</h2>
 
 <table class="res-page-table">
     <thead>

@@ -73,6 +73,7 @@ def partial_res(request):
     return JsonResponse(data)
 
 
+@login_required(login_url='account_login')
 def my_reservations(request):
     reservations = Reservation.objects.filter(user=request.user)
     context = {'reservations': reservations}
