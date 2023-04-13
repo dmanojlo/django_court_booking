@@ -75,7 +75,7 @@ def partial_res(request):
 
 @login_required(login_url='account_login')
 def my_reservations(request):
-    reservations = Reservation.objects.filter(user=request.user)
+    reservations = Reservation.objects.filter(user=request.user, booking_date__day__gte=date.today().day, booking_date__month__gte=date.today().month)
     context = {'reservations': reservations}
     return render(request, 'court_booking/my_reservations.html', context)
 
