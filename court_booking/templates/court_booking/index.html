@@ -12,16 +12,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 	</head>
-	<body class="is-preload">
+	<body>
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">Tennis Center</a></h1>
+						<h1><a href="{% url 'court_booking:index' %}">Tennis Center</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -32,11 +31,9 @@
 						<div class="inner">
 							<h2>Menu</h2>
 							<ul class="links">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="generic.html">Generic</a></li>
-								<li><a href="elements.html">Elements</a></li>
-								<li><a href="#">Log In</a></li>
-								<li><a href="#">Sign Up</a></li>
+								<li><a href="{% url 'court_booking:index' %}">Home</a></li>
+								<li><a href="{% url 'account_login' %}">Log In</a></li>
+								<li><a href="{% url 'account_signup' %}">Register</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
 						</div>
@@ -95,12 +92,7 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'assets/js/util.js' %}"></script>
-			<script src="{% static 'assets/js/main.js' %}"></script>
+			
 
 	</body>
 </html>

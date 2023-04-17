@@ -114,16 +114,7 @@ input, select, textarea {
  center;
 	}
 
-		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			-ms-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
-		}
+	
 
 /* Type */
 
@@ -2249,6 +2240,7 @@ input, select, textarea {
 	input[type="email"],
 	select {
 		height: 2.75em;
+		color: white !important;
 	}
 
 	textarea {
@@ -3406,7 +3398,19 @@ input, select, textarea {
 			transform: translateY(0);
 			opacity: 1;
 			margin: 0 0 1.3em 0;
+			animation: fadeIn ease 2s;
 		}
+
+		@keyframes fadeIn {
+			0% {
+			  opacity: 0;
+			  transform: translateY(20px);
+			}
+			100% {
+			  opacity: 1;
+			  transform: translateY(0);
+			}
+		  }
 
 			#banner .logo .icon {
 				cursor: default;
@@ -3542,37 +3546,7 @@ input, select, textarea {
 
 		}
 
-		body.is-preload #banner .logo {
-			-moz-transform: translateY(0.5em);
-			-webkit-transform: translateY(0.5em);
-			-ms-transform: translateY(0.5em);
-			transform: translateY(0.5em);
-			opacity: 0;
-		}
-
-		body.is-preload #banner h2 {
-			opacity: 0;
-			-moz-transform: translateX(0.25em);
-			-webkit-transform: translateX(0.25em);
-			-ms-transform: translateX(0.25em);
-			transform: translateX(0.25em);
-			-moz-filter: blur(2px);
-			-webkit-filter: blur(2px);
-			-ms-filter: blur(2px);
-			filter: blur(2px);
-		}
-
-		body.is-preload #banner p {
-			opacity: 0;
-			-moz-transform: translateX(0.5em);
-			-webkit-transform: translateX(0.5em);
-			-ms-transform: translateX(0.5em);
-			transform: translateX(0.5em);
-			-moz-filter: blur(2px);
-			-webkit-filter: blur(2px);
-			-ms-filter: blur(2px);
-			filter: blur(2px);
-		}
+	
 
 /* Wrapper */
 
