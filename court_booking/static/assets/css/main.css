@@ -3396,9 +3396,8 @@ input, select, textarea {
 			-webkit-transform: translateY(0);
 			-ms-transform: translateY(0);
 			transform: translateY(0);
-			opacity: 1;
 			margin: 0 0 1.3em 0;
-			animation: fadeIn ease 2s;
+			animation: fadeIn ease 1.5s;
 		}
 
 		@keyframes fadeIn {
@@ -3438,12 +3437,26 @@ input, select, textarea {
 			-webkit-filter: blur(0);
 			-ms-filter: blur(0);
 			filter: blur(0);
-			opacity: 1;
 			border-bottom: solid 2px rgba(255, 255, 255, 0.125);
 			font-size: 2.25em;
 			margin-bottom: 0.8em;
 			padding-bottom: 0.4em;
+			animation: fadeInleft ease 0.9s 0.65s both;
+
 		}
+
+		@keyframes fadeInleft {
+			0% {
+			  opacity: 0;
+			  transform: translateX(20px);
+			}
+			100% {
+			  visibility: visible;
+			  opacity: 1;
+			  transform: translateX(0);
+			}
+		  }
+
 
 		#banner p {
 			-moz-transition: opacity 0.5s ease, -moz-transform 0.5s ease, -moz-filter 0.25s ease;
@@ -3469,6 +3482,7 @@ input, select, textarea {
 			letter-spacing: 0.1em;
 			line-height: 2;
 			text-transform: uppercase;
+			animation: fadeInleft ease 0.9s 0.8s both;
 		}
 
 
@@ -3491,6 +3505,7 @@ input, select, textarea {
 			-ms-filter: blur(0);
 			filter: blur(0);
 			opacity: 1;
+			animation: fadeInleft ease 0.9s 0.9s both;
 		}
 
 		@media screen and (max-width: 1280px) {
