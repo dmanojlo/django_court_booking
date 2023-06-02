@@ -271,6 +271,7 @@ $(document).ready(function() {
               if (data.form_is_valid) {
                 $("#izdano-table tbody").html(data.html_izdano_list);
                 $("#modal-book").modal("hide");
+                window.location.reload();
                 //console.log(data.html_izdano_list)
               } else {
                 $("#modal-book .modal-content").html(data.html_form);
@@ -306,8 +307,8 @@ $(document).ready(function() {
         $("#modal-book").on("submit", ".js-izdano-update-form", saveForm);
 
         // Delete book
-        $("#izdano-table").on("click", ".js-delete-izdano", loadForm);
-        $("#modal-book").on("submit", ".js-izdano-delete-form", saveForm);
+        $(".cli").on("click", ".js-delete-load", loadForm);
+        $("#modal-book").on("submit", ".js-delete-form", saveForm);
       });
     });
 

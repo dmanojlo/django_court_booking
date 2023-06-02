@@ -38,10 +38,16 @@
             <td>{{res.start_time|time:"H:i"}}</td>
             <td>{{res.end_time|time:"H:i"}}</td>
             <td>{{res.booking_date|date:"d.m.Y"}}</td>
-            <td><a href="{% url 'court_booking:delete_res' res.id %}">Cancel</a></td>
+            <td class="cli"> <button type="button"  data-url="{% url 'court_booking:item_delete_view' res.id %}" data-toggle="modal" class="js-delete-load">Delete</button></td>
         </tr>
     </tbody>
     {% endfor %}
 </table>
+
+<div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content"></div>
+    </div>
+  </div>
 
 {% endblock %}

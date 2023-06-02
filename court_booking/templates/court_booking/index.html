@@ -22,22 +22,10 @@
 					<header id="header" class="alt">
 						<h1><a href="{% url 'court_booking:index' %}">Tennis Center</a></h1>
 						<nav>
-							<a href="#menu">Menu</a>
+							<a id="men" href="#menu">Menu</a>
 						</nav>
 					</header>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="{% url 'court_booking:index' %}">Home</a></li>
-								<li><a href="{% url 'account_login' %}">Log In</a></li>
-								<li><a href="{% url 'account_signup' %}">Register</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
 
 				<!-- Banner -->
 					<section id="banner">
@@ -90,6 +78,19 @@
 					</section>
 
 			</div>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<div class="inner">
+					<h2>Menu</h2>
+					<ul class="links">
+						<li><a href="{% url 'court_booking:index' %}">Home</a></li>
+						<li><a href="{% url 'account_login' %}">Log In</a></li>
+						<li><a href="{% url 'account_signup' %}">Register</a></li>
+					</ul>
+					<a href="#" class="close">Close</a>
+				</div>
+			</nav>
 
 		<!-- Scripts -->
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

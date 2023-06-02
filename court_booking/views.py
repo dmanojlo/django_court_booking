@@ -79,9 +79,48 @@ def my_reservations(request):
     context = {'reservations': reservations}
     return render(request, 'court_booking/my_reservations.html', context)
 
-def delete_res(request,pk):
-    res = Reservation.objects.get(id=pk)
+#without modal
+# def delete_res(request,pk):
+#     res = Reservation.objects.get(id=pk)
+#     if request.method == 'POST':
+#         res.delete()
+#         return redirect('court_booking:my_reservations')
+#     return render(request, 'court_booking/delete.html', {'obj':res})
+
+
+def partial_res(request):
+    data = dict()
+    if request.method == 'POST':
+        # court_nam = request.POST.get('court')
+        # print(court_nam)
+        # court = Court.objects.get(court_name=court_nam)
+        # print(court)
+        form = ReservationForm(request.POST)
+        #if form.is_valid():
+        print('ndjanddsknsf')
+        res = form.save(commit=False)
+        print(res)
+        res.user = request.user
+        res.save()
+        data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', {'form': form}, request)
+
+    else:
+        form = ReservationForm()
+    context = {'form':form}
+    data['html_form'] = render_to_string('court_booking/partial_reservation_form.html', context, request)
+    return JsonResponse(data)
+
+
+def item_delete_view(request, pk):
+    res = get_object_or_404(Reservation, id=pk)
+    data = dict()
     if request.method == 'POST':
         res.delete()
-        return redirect('court_booking:my_reservations')
-    return render(request, 'court_booking/delete.html', {'obj':res})
+        data['form_is_valid'] = True
+        context = {'obj': res}
+        messages.success(request, 'Item deleted!')
+        data['html_form'] = render_to_string('court_booking/my_reservations.html',context, request)
+    else:
+        context = {'obj': res}
+        data['html_form'] = render_to_string('court_booking/delete_modal.html', context, request)
+    return JsonResponse(data)

@@ -486,3 +486,11 @@
 	color: #000 !important;
 	background-color: rgb(233, 236, 239);;
 }
+
+.modal-body input[type="text"]{
+	color: #000 !important;
+}
+
+.container .form-group input[type="text"]{
+	color: #ffffff;
+}

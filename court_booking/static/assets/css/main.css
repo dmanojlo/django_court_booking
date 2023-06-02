@@ -2240,7 +2240,7 @@ input, select, textarea {
 	input[type="email"],
 	select {
 		height: 2.75em;
-		color: white !important;
+		color: white;
 	}
 
 	textarea {
